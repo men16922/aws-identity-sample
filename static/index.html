@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SigV4 Browser Call PoC</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main>
+    <h1>SigV4 브라우저 직접 호출 PoC</h1>
+    <p class="muted">
+      백엔드(EC2)가 서명한 <code>ec2:DescribeInstances</code> 요청을 이 브라우저가 AWS로 직접 보냅니다.
+      AWS 요청의 출발지 IP는 이 PC의 인터넷 출구 IP입니다.
+    </p>
+
+    <section>
+      <h2>1. 백엔드 SSO 상태</h2>
+      <dl id="status"><dt>상태</dt><dd>불러오는 중…</dd></dl>
+      <button id="refresh-status" type="button">상태 새로고침</button>
+    </section>
+
+    <section>
+      <h2>2. 서명 받기 → AWS 직접 호출</h2>
+      <button id="run" type="button">DescribeInstances 실행</button>
+      <div id="verdict" class="verdict" hidden></div>
+      <h3>서명된 요청 요약 <span class="muted">(서명/토큰 값은 화면에 표시하지 않음)</span></h3>
+      <pre id="request-summary">-</pre>
+      <h3>AWS 응답 <span id="http-status" class="muted"></span></h3>
+      <pre id="aws-response">-</pre>
+      <h3>백엔드 전달 결과</h3>
+      <pre id="report">-</pre>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
